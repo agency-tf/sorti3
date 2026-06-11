@@ -78,20 +78,24 @@
                 </h1>
             </div>
 
-            <!-- SELECTOR DE INFLUENCER / CÓDIGO -->
-            <div class="w-full px-4 mb-6 text-left">
-                <label class="block text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 pl-1">¿Quién te recomendó? Selecciona tu Influencer:</label>
-                <div class="relative">
-                    <select id="influencer-select" onchange="selectInfluencer()" class="w-full bg-black/60 border-2 border-emerald-500/20 hover:border-emerald-500/40 rounded-2xl px-4 py-4 text-sm font-bold text-white outline-none focus:border-emerald-500 transition-all appearance-none cursor-pointer backdrop-blur-md">
-                        <!-- Se puebla dinámicamente -->
-                    </select>
-                    <!-- Flecha de dropdown personalizada -->
-                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-emerald-400">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </div>
+            <!-- ENTRADA DE TEXTO DE INFLUENCER / RECOMENDADO -->
+            <div class="w-full px-4 mb-8 text-left">
+                <div class="flex items-center justify-between mb-2 pl-1">
+                    <label class="block text-xs font-bold uppercase tracking-widest text-emerald-400">¿Quién te recomendó?</label>
+                    <span class="text-[10px] text-emerald-500/60 font-semibold uppercase tracking-wider">Código o Nombre</span>
                 </div>
+                
+                <!-- Input de diseño mejorado estilo Ticket Premium -->
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-emerald-400/70 pointer-events-none">
+                        🎟️
+                    </span>
+                    <input type="text" id="influencer-input" oninput="updateMessage()" placeholder="Escribe el nombre aquí..." class="w-full bg-black/75 border-2 border-emerald-500/20 hover:border-emerald-500/40 rounded-2xl pl-11 pr-4 py-4 text-sm font-bold text-white outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all backdrop-blur-md placeholder-slate-500/70">
+                </div>
+                <!-- El texto explicativo ha sido ampliado ligeramente de tamaño a text-[11px] para mejor visualización -->
+                <p class="text-[11px] text-slate-400/90 mt-1.5 pl-1 leading-normal font-medium">
+                    Ingresa el nombre del influencer o recomendado para activar los beneficios de tu cuenta Sorti365.
+                </p>
             </div>
 
             <!-- BOTÓN ÚNICO DE ALTA CONVERSIÓN -->
@@ -126,7 +130,7 @@
             <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
                 <div>
                     <h3 class="text-lg font-bold text-white">Configuración del Puente</h3>
-                    <p class="text-xs text-slate-400">Edita los textos, añade influencers y descarga la web</p>
+                    <p class="text-xs text-slate-400">Edita los textos de la página y descarga el archivo</p>
                 </div>
                 <button onclick="toggleConfig()" class="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-all text-sm font-bold">
                     ✕
@@ -178,19 +182,11 @@
                     <input type="text" id="input-disclaimer" value="*18 | Juega con responsabilidad | Aplican T&C" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
                 </div>
 
-                <!-- GESTIÓN DINÁMICA DE INFLUENCERS -->
+                <!-- CONFIGURACIÓN DE MENSAJE BASE -->
                 <div class="border-t border-white/5 pt-4">
-                    <div class="flex justify-between items-center mb-3">
-                        <label class="block text-xs font-bold uppercase text-emerald-400 tracking-wider">Lista de Influencers & Mensajes</label>
-                        <button onclick="addInfluencerField()" class="px-3 py-1 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-slate-950 text-xs font-bold rounded-lg transition-all flex items-center gap-1">
-                            ➕ Añadir Nuevo
-                        </button>
-                    </div>
-
-                    <!-- Contenedor dinámico de campos de influencers -->
-                    <div id="influencers-manager-container" class="space-y-3 max-h-60 overflow-y-auto pr-1">
-                        <!-- Se poblará por JS -->
-                    </div>
+                    <label class="block text-xs font-bold uppercase text-emerald-400 mb-1.5">Mensaje Base de WhatsApp</label>
+                    <input type="text" id="input-msg-template" value="Hola vengo de parte de" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
+                    <p class="text-[10px] text-slate-400 mt-1.5">El nombre que escriba el usuario se añadirá de forma automática al final de este texto.</p>
                 </div>
             </div>
 
@@ -207,7 +203,7 @@
         </div>
     </div>
 
-    <!-- Footer decorativo -->
+    <!-- Footer de la marca -->
     <footer class="py-4 text-center text-[10px] text-emerald-500/30 font-semibold uppercase tracking-widest relative z-10 bg-black/25">
         &copy; Sorti365 Secure Bridge Technology
     </footer>
@@ -219,7 +215,7 @@
 
     <!-- SCRIPT DE EFECTOS VISUALES Y CONTROL DE CONFIGURACIÓN -->
     <script>
-        // Configuración inicial por defecto (Únicamente Chuky como influencer inicial)
+        // Configuración inicial por defecto
         let config = {
             phone: "593963041121",
             brandSubtitle: "Soporte y Registro VIP",
@@ -228,55 +224,13 @@
             btnText: "🟢 INGRESAR AL CHAT VIP",
             btnSubtext: "Registrarse & Obtener Pronósticos",
             disclaimer: "*18 | Juega con responsabilidad | Aplican T&C",
-            influencers: [
-                { id: "1", name: "Chuky (Recomendado)", msg: "hola vengo de parte de chuky" }
-            ]
+            msgTemplate: "Hola vengo de parte de"
         };
 
         // Mostrar u ocultar el panel de configuración
         function toggleConfig() {
             const panel = document.getElementById('config-panel');
             panel.classList.toggle('hidden');
-            if (!panel.classList.contains('hidden')) {
-                renderInfluencerManager();
-            }
-        }
-
-        // Renderizar el administrador de influencers dinámico dentro de la configuración
-        function renderInfluencerManager() {
-            const container = document.getElementById('influencers-manager-container');
-            container.innerHTML = "";
-
-            config.influencers.forEach((influencer, index) => {
-                const div = document.createElement('div');
-                div.className = "p-3 bg-slate-950/60 border border-white/5 rounded-xl space-y-2 relative group";
-                div.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <input type="text" placeholder="Nombre (ej. Chuky)" value="${influencer.name}" class="influencer-name-input flex-grow bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white outline-none focus:border-emerald-500">
-                        <button onclick="removeInfluencerField(${index})" class="p-1.5 bg-red-500/10 hover:bg-red-500/30 text-red-400 rounded-lg text-xs transition-all font-bold" title="Eliminar">
-                            ✕
-                        </button>
-                    </div>
-                    <input type="text" placeholder="Mensaje de WhatsApp" value="${influencer.msg}" class="influencer-msg-input w-full bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-slate-300 outline-none focus:border-emerald-500">
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Añadir un nuevo campo en blanco para influencers
-        function addInfluencerField() {
-            config.influencers.push({
-                id: Date.now().toString(),
-                name: "Nuevo Influencer",
-                msg: "hola vengo de parte de..."
-            });
-            renderInfluencerManager();
-        }
-
-        // Remover un campo de la lista
-        function removeInfluencerField(index) {
-            config.influencers.splice(index, 1);
-            renderInfluencerManager();
         }
 
         // Aplicar los cambios de configuración
@@ -288,32 +242,14 @@
             config.btnText = document.getElementById('input-btn-text').value;
             config.btnSubtext = document.getElementById('input-btn-subtext').value;
             config.disclaimer = document.getElementById('input-disclaimer').value;
-
-            // Recoger los datos de influencers dinámicos
-            const names = document.querySelectorAll('.influencer-name-input');
-            const msgs = document.querySelectorAll('.influencer-msg-input');
-            
-            const newInfluencers = [];
-            names.forEach((el, index) => {
-                newInfluencers.push({
-                    id: index.toString(),
-                    name: el.value.trim() || `Influencer ${index + 1}`,
-                    msg: msgs[index].value.trim() || "hola vengo a registrarme"
-                });
-            });
-
-            if (newInfluencers.length === 0) {
-                newInfluencers.push({ id: "default", name: "General", msg: "Hola vengo por los pronósticos" });
-            }
-
-            config.influencers = newInfluencers;
+            config.msgTemplate = document.getElementById('input-msg-template').value;
 
             updateDOM();
             toggleConfig();
             showToast("¡Configuración aplicada y actualizada!");
         }
 
-        // Actualizar visualmente la página entera y el dropdown
+        // Actualizar visualmente la página entera
         function updateDOM() {
             document.getElementById('view-brand-subtitle').innerText = config.brandSubtitle;
             document.getElementById('view-main-title').innerText = config.mainTitle;
@@ -322,42 +258,23 @@
             document.getElementById('view-btn-subtext').innerText = config.btnSubtext;
             document.getElementById('view-disclaimer').innerText = config.disclaimer;
 
-            // Poblar el dropdown de influencers de manera limpia
-            const selectEl = document.getElementById('influencer-select');
-            const previousSelectedValue = selectEl.value;
-            selectEl.innerHTML = "";
-
-            config.influencers.forEach(inf => {
-                const opt = document.createElement('option');
-                opt.value = inf.id;
-                opt.innerText = inf.name;
-                selectEl.appendChild(opt);
-            });
-
-            // Intentar mantener la selección anterior o tomar el primer elemento
-            if (config.influencers.some(i => i.id === previousSelectedValue)) {
-                selectEl.value = previousSelectedValue;
-            } else {
-                selectEl.value = config.influencers[0].id;
-            }
-
-            // Actualizar el enlace final de WhatsApp basado en el influencer activo
-            selectInfluencer();
+            // Actualizar el enlace final de WhatsApp basado en la entrada de texto
+            updateMessage();
         }
 
-        // Se ejecuta cuando el usuario selecciona un influencer del dropdown
-        function selectInfluencer() {
-            const selectEl = document.getElementById('influencer-select');
-            const selectedId = selectEl.value;
-            const influencer = config.influencers.find(i => i.id === selectedId) || config.influencers[0];
+        // Se ejecuta cada vez que el usuario escribe en el campo de texto
+        function updateMessage() {
+            const nameInput = document.getElementById('influencer-input');
+            const name = nameInput.value.trim() || "......."; // El valor predeterminado cambió de Chuky a puntos suspensivos
 
-            if (influencer) {
-                const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(influencer.msg)}`;
-                document.getElementById('btn-main-action').href = finalWaUrl;
-                
-                // Actualiza dinámicamente el subtexto del botón para incentivar la conversión
-                document.getElementById('view-btn-subtext').innerText = `Mensaje de chat listo para: ${influencer.name}`;
-            }
+            const finalMsg = `${config.msgTemplate} ${name}`;
+            const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(finalMsg)}`;
+            
+            // Vincular el nuevo enlace dinámico al botón
+            document.getElementById('btn-main-action').href = finalWaUrl;
+            
+            // Mostrar una vista previa del mensaje final en el subtexto del botón
+            document.getElementById('view-btn-subtext').innerText = `Mensaje listo: "${finalMsg}"`;
         }
 
         // Descargar tu propia versión nativa ya configurada (Serialización robusta por JSON)
@@ -378,6 +295,7 @@
             currentHTML = currentHTML.replace(/id="input-btn-text" value=".*?"/, `id="input-btn-text" value="${config.btnText}"`);
             currentHTML = currentHTML.replace(/id="input-btn-subtext" value=".*?"/, `id="input-btn-subtext" value="${config.btnSubtext}"`);
             currentHTML = currentHTML.replace(/id="input-disclaimer" value=".*?"/, `id="input-disclaimer" value="${config.disclaimer}"`);
+            currentHTML = currentHTML.replace(/id="input-msg-template" value=".*?"/, `id="input-msg-template" value="${config.msgTemplate}"`);
 
             const blob = new Blob(["<!DOCTYPE html>\n" + currentHTML], { type: 'text/html' });
             const url = URL.createObjectURL(blob);

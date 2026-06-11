@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -92,7 +93,6 @@
                     </span>
                     <input type="text" id="influencer-input" oninput="updateMessage()" placeholder="Escribe el nombre aquí..." class="w-full bg-black/75 border-2 border-emerald-500/20 hover:border-emerald-500/40 rounded-2xl pl-11 pr-4 py-4 text-base font-bold text-white outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all backdrop-blur-md placeholder-slate-500/70">
                 </div>
-                <!-- El texto explicativo ha sido ampliado a text-[13px] para un aspecto mucho más legible y profesional -->
                 <p class="text-[13px] text-slate-300/90 mt-2 pl-1 leading-relaxed font-medium">
                     Ingresa el nombre del influencer o recomendado para activar los beneficios de tu cuenta Sorti365.
                 </p>
@@ -101,9 +101,9 @@
             <!-- BOTÓN ÚNICO DE ALTA CONVERSIÓN -->
             <div class="w-full px-4 mb-6">
                 <!-- target="_top" evita cualquier bloqueo de WebKit/Safari al abrir desde apps como Instagram o Facebook -->
-                <a id="btn-main-action" href="#" target="_top" class="btn-neon-glow animate-pulse-glow flex flex-col items-center justify-center w-full py-5 px-6 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 active:scale-95 text-slate-950 rounded-2xl transition-all duration-200">
+                <a id="btn-main-action" href="#" target="_top" class="flex flex-col items-center justify-center w-full py-5 px-6 rounded-2xl transition-all duration-200">
                     <span id="view-btn-text" class="text-xl font-black uppercase tracking-wider">🟢 INGRESAR AL CHAT VIP</span>
-                    <span id="view-btn-subtext" class="text-xs text-slate-950/75 font-semibold mt-1">Registrarse & Obtener Pronósticos</span>
+                    <span id="view-btn-subtext" class="text-xs font-semibold mt-1">Registrarse & Obtener Pronósticos</span>
                 </a>
             </div>
 
@@ -254,27 +254,49 @@
             document.getElementById('view-brand-subtitle').innerText = config.brandSubtitle;
             document.getElementById('view-main-title').innerText = config.mainTitle;
             document.getElementById('view-accent-title').innerText = config.accentTitle;
-            document.getElementById('view-btn-text').innerText = config.btnText;
-            document.getElementById('view-btn-subtext').innerText = config.btnSubtext;
-            document.getElementById('view-disclaimer').innerText = config.disclaimer;
 
             // Actualizar el enlace final de WhatsApp basado en la entrada de texto
             updateMessage();
         }
 
-        // Se ejecuta cada vez que el usuario escribe en el campo de texto
+        // Se ejecuta cada vez que el usuario escribe en el campo de texto o cambia la configuración
         function updateMessage() {
             const nameInput = document.getElementById('influencer-input');
-            const name = nameInput.value.trim() || "......."; // El valor predeterminado cambió de Chuky a puntos suspensivos
+            const name = nameInput.value.trim();
+            const btn = document.getElementById('btn-main-action');
+            const btnText = document.getElementById('view-btn-text');
+            const btnSubtext = document.getElementById('view-btn-subtext');
 
-            const finalMsg = `${config.msgTemplate} ${name}`;
-            const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(finalMsg)}`;
-            
-            // Vincular el nuevo enlace dinámico al botón
-            document.getElementById('btn-main-action').href = finalWaUrl;
-            
-            // Mostrar una vista previa del mensaje final en el subtexto del botón
-            document.getElementById('view-btn-subtext').innerText = `Mensaje listo: "${finalMsg}"`;
+            if (!name) {
+                // Estado bloqueado (Vacío)
+                btn.href = "#";
+                // Añadimos evento preventivo interactivo
+                btn.onclick = function(e) {
+                    e.preventDefault();
+                    showToast("Por favor, ingresa el nombre de referido para activar el botón");
+                };
+                
+                // Clases de Tailwind de bloqueo visual (Gris sin hover, pulso ni cursor interactivo normal)
+                btn.className = "flex flex-col items-center justify-center w-full py-5 px-6 bg-slate-800 text-slate-500 rounded-2xl border-2 border-slate-700/50 cursor-not-allowed opacity-60 transition-all duration-200";
+                
+                btnText.innerText = "⚠️ INGRESA UN NOMBRE";
+                btnSubtext.innerText = "Es obligatorio escribir quién te recomendó";
+                btnSubtext.className = "text-xs text-red-400 font-semibold mt-1";
+            } else {
+                // Estado desbloqueado (Escribió un nombre)
+                const finalMsg = `${config.msgTemplate} ${name}`;
+                const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(finalMsg)}`;
+                
+                btn.href = finalWaUrl;
+                btn.onclick = null; // Remueve la restricción preventiva
+                
+                // Clases de Tailwind premium neon originales
+                btn.className = "btn-neon-glow animate-pulse-glow flex flex-col items-center justify-center w-full py-5 px-6 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 active:scale-95 text-slate-950 rounded-2xl transition-all duration-200";
+                
+                btnText.innerText = config.btnText;
+                btnSubtext.innerText = `Mensaje listo: "${finalMsg}"`;
+                btnSubtext.className = "text-xs text-slate-950/75 font-semibold mt-1";
+            }
         }
 
         // Descargar tu propia versión nativa ya configurada (Serialización robusta por JSON)
@@ -394,3 +416,5 @@
     </script>
 </body>
 </html>
+
+```

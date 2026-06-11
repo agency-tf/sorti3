@@ -32,7 +32,7 @@
         /* Animación de pulso suave */
         @keyframes pulse-glow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
-            50% { transform: scale(1.03); box-shadow: 0 0 30px rgba(34, 197, 94, 0.7); }
+            50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(34, 197, 94, 0.7); }
         }
         .animate-pulse-glow {
             animation: pulse-glow 2s infinite ease-in-out;
@@ -50,7 +50,7 @@
         <div class="w-full max-w-md text-center flex flex-col items-center">
             
             <!-- Logo Superior (Estilo Sorti365) -->
-            <div class="mb-12 flex items-center gap-2 justify-center bg-black/40 backdrop-blur-md py-2 px-5 rounded-full border border-emerald-500/10">
+            <div class="mb-10 flex items-center gap-2 justify-center bg-black/40 backdrop-blur-md py-2 px-5 rounded-full border border-emerald-500/10">
                 <span class="text-emerald-500 animate-spin" style="animation-duration: 12s;">
                     <!-- Trébol / Estrella Verde de Sorti365 SVG -->
                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
@@ -64,7 +64,7 @@
             </div>
 
             <!-- TÍTULOS CENTRALES (Inspirados en la imagen del mundial) -->
-            <div class="mb-14 px-4">
+            <div class="mb-10 px-4">
                 <!-- Luces de reflectores simuladas en el fondo del texto -->
                 <div class="absolute w-72 h-32 bg-emerald-500/10 rounded-full blur-3xl -translate-y-12 left-1/2 -translate-x-1/2 pointer-events-none"></div>
 
@@ -78,10 +78,26 @@
                 </h1>
             </div>
 
+            <!-- SELECTOR DE INFLUENCER / CÓDIGO -->
+            <div class="w-full px-4 mb-6 text-left">
+                <label class="block text-xs font-bold uppercase tracking-widest text-emerald-400 mb-2 pl-1">¿Quién te recomendó? Selecciona tu Influencer:</label>
+                <div class="relative">
+                    <select id="influencer-select" onchange="selectInfluencer()" class="w-full bg-black/60 border-2 border-emerald-500/20 hover:border-emerald-500/40 rounded-2xl px-4 py-4 text-sm font-bold text-white outline-none focus:border-emerald-500 transition-all appearance-none cursor-pointer backdrop-blur-md">
+                        <!-- Se puebla dinámicamente -->
+                    </select>
+                    <!-- Flecha de dropdown personalizada -->
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-emerald-400">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
             <!-- BOTÓN ÚNICO DE ALTA CONVERSIÓN -->
             <div class="w-full px-4 mb-6">
                 <!-- target="_top" evita cualquier bloqueo de WebKit/Safari al abrir desde apps como Instagram o Facebook -->
-                <a id="btn-main-action" href="https://api.whatsapp.com/send?phone=593963041121&text=hola%20vengo%20de%20parte%20de%20chuky" target="_top" class="btn-neon-glow animate-pulse-glow flex flex-col items-center justify-center w-full py-5 px-6 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 active:scale-95 text-slate-950 rounded-2xl transition-all duration-200">
+                <a id="btn-main-action" href="#" target="_top" class="btn-neon-glow animate-pulse-glow flex flex-col items-center justify-center w-full py-5 px-6 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 active:scale-95 text-slate-950 rounded-2xl transition-all duration-200">
                     <span id="view-btn-text" class="text-xl font-black uppercase tracking-wider">🟢 INGRESAR AL CHAT VIP</span>
                     <span id="view-btn-subtext" class="text-xs text-slate-950/75 font-semibold mt-1">Registrarse & Obtener Pronósticos</span>
                 </a>
@@ -89,7 +105,7 @@
 
             <!-- Sello de Juego Responsable -->
             <p id="view-disclaimer" class="text-[9px] text-emerald-500/60 uppercase tracking-widest font-semibold">
-                🔞 Juega con responsabilidad | Aplican T&C
+                *18 | Juega con responsabilidad | Aplican T&C
             </p>
 
         </div>
@@ -110,24 +126,18 @@
             <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
                 <div>
                     <h3 class="text-lg font-bold text-white">Configuración del Puente</h3>
-                    <p class="text-xs text-slate-400">Edita los textos y descarga tu propia web</p>
+                    <p class="text-xs text-slate-400">Edita los textos, añade influencers y descarga la web</p>
                 </div>
                 <button onclick="toggleConfig()" class="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-all text-sm font-bold">
                     ✕
                 </button>
             </div>
 
-            <div class="space-y-4 text-left">
+            <div class="space-y-5 text-left">
                 <!-- Teléfono -->
                 <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Tu número de WhatsApp</label>
+                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Tu número de WhatsApp (Con código de país)</label>
                     <input type="tel" id="input-phone" value="593963041121" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
-                </div>
-
-                <!-- Mensaje de WhatsApp -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Mensaje de Bienvenida (Chuky)</label>
-                    <input type="text" id="input-msg" value="hola vengo de parte de chuky" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
                 </div>
 
                 <!-- Título Superior -->
@@ -165,7 +175,22 @@
                 <!-- Términos de Juego -->
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Sello Legal Inferior</label>
-                    <input type="text" id="input-disclaimer" value="🔞 Juega con responsabilidad | Aplican T&C" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
+                    <input type="text" id="input-disclaimer" value="*18 | Juega con responsabilidad | Aplican T&C" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
+                </div>
+
+                <!-- GESTIÓN DINÁMICA DE INFLUENCERS -->
+                <div class="border-t border-white/5 pt-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-xs font-bold uppercase text-emerald-400 tracking-wider">Lista de Influencers & Mensajes</label>
+                        <button onclick="addInfluencerField()" class="px-3 py-1 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-slate-950 text-xs font-bold rounded-lg transition-all flex items-center gap-1">
+                            ➕ Añadir Nuevo
+                        </button>
+                    </div>
+
+                    <!-- Contenedor dinámico de campos de influencers -->
+                    <div id="influencers-manager-container" class="space-y-3 max-h-60 overflow-y-auto pr-1">
+                        <!-- Se poblará por JS -->
+                    </div>
                 </div>
             </div>
 
@@ -194,28 +219,69 @@
 
     <!-- SCRIPT DE EFECTOS VISUALES Y CONTROL DE CONFIGURACIÓN -->
     <script>
-        // Configuración por defecto
+        // Configuración inicial por defecto (Únicamente Chuky como influencer inicial)
         let config = {
             phone: "593963041121",
-            msg: "hola vengo de parte de chuky",
             brandSubtitle: "Soporte y Registro VIP",
             mainTitle: "COPA",
             accentTitle: "MUNDIAL",
             btnText: "🟢 INGRESAR AL CHAT VIP",
             btnSubtext: "Registrarse & Obtener Pronósticos",
-            disclaimer: "🔞 Juega con responsabilidad | Aplican T&C"
+            disclaimer: "*18 | Juega con responsabilidad | Aplican T&C",
+            influencers: [
+                { id: "1", name: "Chuky (Recomendado)", msg: "hola vengo de parte de chuky" }
+            ]
         };
 
         // Mostrar u ocultar el panel de configuración
         function toggleConfig() {
             const panel = document.getElementById('config-panel');
             panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                renderInfluencerManager();
+            }
         }
 
-        // Aplicar los cambios ingresados en los inputs
+        // Renderizar el administrador de influencers dinámico dentro de la configuración
+        function renderInfluencerManager() {
+            const container = document.getElementById('influencers-manager-container');
+            container.innerHTML = "";
+
+            config.influencers.forEach((influencer, index) => {
+                const div = document.createElement('div');
+                div.className = "p-3 bg-slate-950/60 border border-white/5 rounded-xl space-y-2 relative group";
+                div.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <input type="text" placeholder="Nombre (ej. Chuky)" value="${influencer.name}" class="influencer-name-input flex-grow bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white outline-none focus:border-emerald-500">
+                        <button onclick="removeInfluencerField(${index})" class="p-1.5 bg-red-500/10 hover:bg-red-500/30 text-red-400 rounded-lg text-xs transition-all font-bold" title="Eliminar">
+                            ✕
+                        </button>
+                    </div>
+                    <input type="text" placeholder="Mensaje de WhatsApp" value="${influencer.msg}" class="influencer-msg-input w-full bg-slate-900 border border-white/10 rounded-lg px-2.5 py-1 text-xs text-slate-300 outline-none focus:border-emerald-500">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Añadir un nuevo campo en blanco para influencers
+        function addInfluencerField() {
+            config.influencers.push({
+                id: Date.now().toString(),
+                name: "Nuevo Influencer",
+                msg: "hola vengo de parte de..."
+            });
+            renderInfluencerManager();
+        }
+
+        // Remover un campo de la lista
+        function removeInfluencerField(index) {
+            config.influencers.splice(index, 1);
+            renderInfluencerManager();
+        }
+
+        // Aplicar los cambios de configuración
         function applyChanges() {
             config.phone = document.getElementById('input-phone').value.replace(/[^0-9]/g, '');
-            config.msg = document.getElementById('input-msg').value;
             config.brandSubtitle = document.getElementById('input-brand-subtitle').value;
             config.mainTitle = document.getElementById('input-main-title').value;
             config.accentTitle = document.getElementById('input-accent-title').value;
@@ -223,12 +289,31 @@
             config.btnSubtext = document.getElementById('input-btn-subtext').value;
             config.disclaimer = document.getElementById('input-disclaimer').value;
 
+            // Recoger los datos de influencers dinámicos
+            const names = document.querySelectorAll('.influencer-name-input');
+            const msgs = document.querySelectorAll('.influencer-msg-input');
+            
+            const newInfluencers = [];
+            names.forEach((el, index) => {
+                newInfluencers.push({
+                    id: index.toString(),
+                    name: el.value.trim() || `Influencer ${index + 1}`,
+                    msg: msgs[index].value.trim() || "hola vengo a registrarme"
+                });
+            });
+
+            if (newInfluencers.length === 0) {
+                newInfluencers.push({ id: "default", name: "General", msg: "Hola vengo por los pronósticos" });
+            }
+
+            config.influencers = newInfluencers;
+
             updateDOM();
             toggleConfig();
-            showToast("¡Diseño actualizado con éxito!");
+            showToast("¡Configuración aplicada y actualizada!");
         }
 
-        // Actualizar visualmente la página
+        // Actualizar visualmente la página entera y el dropdown
         function updateDOM() {
             document.getElementById('view-brand-subtitle').innerText = config.brandSubtitle;
             document.getElementById('view-main-title').innerText = config.mainTitle;
@@ -237,33 +322,56 @@
             document.getElementById('view-btn-subtext').innerText = config.btnSubtext;
             document.getElementById('view-disclaimer').innerText = config.disclaimer;
 
-            // Actualizar el enlace principal del botón
-            const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(config.msg)}`;
-            document.getElementById('btn-main-action').href = finalWaUrl;
+            // Poblar el dropdown de influencers de manera limpia
+            const selectEl = document.getElementById('influencer-select');
+            const previousSelectedValue = selectEl.value;
+            selectEl.innerHTML = "";
+
+            config.influencers.forEach(inf => {
+                const opt = document.createElement('option');
+                opt.value = inf.id;
+                opt.innerText = inf.name;
+                selectEl.appendChild(opt);
+            });
+
+            // Intentar mantener la selección anterior o tomar el primer elemento
+            if (config.influencers.some(i => i.id === previousSelectedValue)) {
+                selectEl.value = previousSelectedValue;
+            } else {
+                selectEl.value = config.influencers[0].id;
+            }
+
+            // Actualizar el enlace final de WhatsApp basado en el influencer activo
+            selectInfluencer();
         }
 
-        // Descargar tu propia versión nativa ya configurada
+        // Se ejecuta cuando el usuario selecciona un influencer del dropdown
+        function selectInfluencer() {
+            const selectEl = document.getElementById('influencer-select');
+            const selectedId = selectEl.value;
+            const influencer = config.influencers.find(i => i.id === selectedId) || config.influencers[0];
+
+            if (influencer) {
+                const finalWaUrl = `https://api.whatsapp.com/send?phone=${config.phone}&text=${encodeURIComponent(influencer.msg)}`;
+                document.getElementById('btn-main-action').href = finalWaUrl;
+                
+                // Actualiza dinámicamente el subtexto del botón para incentivar la conversión
+                document.getElementById('view-btn-subtext').innerText = `Mensaje de chat listo para: ${influencer.name}`;
+            }
+        }
+
+        // Descargar tu propia versión nativa ya configurada (Serialización robusta por JSON)
         function downloadSelf() {
             let currentHTML = document.documentElement.outerHTML;
 
-            // Guardar el estado de variables de configuración por defecto
+            // Guardar el estado exacto de la configuración serializado como JSON
             const regexConfig = /let config = \{[\s\S]*?\};/;
-            const newConfigString = `let config = {
-            phone: "${config.phone}",
-            msg: "${config.msg.replace(/"/g, '\\"')}",
-            brandSubtitle: "${config.brandSubtitle.replace(/"/g, '\\"')}",
-            mainTitle: "${config.mainTitle.replace(/"/g, '\\"')}",
-            accentTitle: "${config.accentTitle.replace(/"/g, '\\"')}",
-            btnText: "${config.btnText.replace(/"/g, '\\"')}",
-            btnSubtext: "${config.btnSubtext.replace(/"/g, '\\"')}",
-            disclaimer: "${config.disclaimer.replace(/"/g, '\\"')}"
-        };`;
+            const newConfigString = `let config = ${JSON.stringify(config, null, 12)};`;
 
             currentHTML = currentHTML.replace(regexConfig, newConfigString);
 
-            // Reemplazar valores de inputs en el archivo para que se queden fijos
+            // Reemplazar valores base de los inputs para que al cargarse de nuevo conserven los datos limpios
             currentHTML = currentHTML.replace(/id="input-phone" value=".*?"/, `id="input-phone" value="${config.phone}"`);
-            currentHTML = currentHTML.replace(/id="input-msg" value=".*?"/, `id="input-msg" value="${config.msg}"`);
             currentHTML = currentHTML.replace(/id="input-brand-subtitle" value=".*?"/, `id="input-brand-subtitle" value="${config.brandSubtitle}"`);
             currentHTML = currentHTML.replace(/id="input-main-title" value=".*?"/, `id="input-main-title" value="${config.mainTitle}"`);
             currentHTML = currentHTML.replace(/id="input-accent-title" value=".*?"/, `id="input-accent-title" value="${config.accentTitle}"`);
@@ -275,7 +383,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'sorti365_copa_mundial_landing.html';
+            a.download = 'sorti365_influencer_bridge.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);

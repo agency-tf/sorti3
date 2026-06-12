@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,94 +114,6 @@
         </div>
     </main>
 
-    <!-- BOTÓN DE CONFIGURACIÓN MODERADO -->
-    <div class="absolute bottom-4 left-4 z-20">
-        <button onclick="toggleConfig()" class="p-2.5 bg-black/60 hover:bg-black/80 border border-white/5 hover:border-white/15 rounded-xl text-slate-400 hover:text-emerald-400 transition-all shadow-md">
-            <!-- Icono de configuración simple -->
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        </button>
-    </div>
-
-    <!-- PANEL DE CONFIGURACIÓN MODAL -->
-    <div id="config-panel" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-white/10 w-full max-w-lg rounded-3xl p-6 shadow-2xl overflow-y-auto max-h-[90vh]">
-            
-            <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
-                <div>
-                    <h3 class="text-lg font-bold text-white">Configuración del Puente</h3>
-                    <p class="text-xs text-slate-400">Edita los textos de la página y descarga el archivo</p>
-                </div>
-                <button onclick="toggleConfig()" class="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-slate-400 hover:text-white transition-all text-sm font-bold">
-                    ✕
-                </button>
-            </div>
-
-            <div class="space-y-5 text-left">
-                <!-- Teléfono -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Tu número de WhatsApp (Con código de país)</label>
-                    <input type="tel" id="input-phone" value="593963041121" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
-                </div>
-
-                <!-- Título Superior -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Mini Subtítulo Superior</label>
-                    <input type="text" id="input-brand-subtitle" value="Soporte y Registro VIP" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <!-- Título 1 -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Título Principal 1 (Blanco)</label>
-                        <input type="text" id="input-main-title" value="COPA" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-200 outline-none">
-                    </div>
-                    <!-- Título 2 -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Título Principal 2 (Naranja)</label>
-                        <input type="text" id="input-accent-title" value="MUNDIAL" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-200 outline-none">
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3">
-                    <!-- Texto Botón -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Texto del Botón</label>
-                        <input type="text" id="input-btn-text" value="🟢 INGRESAR AL CHAT VIP" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-200 outline-none">
-                    </div>
-                    <!-- Subtexto Botón -->
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Subtexto del Botón</label>
-                        <input type="text" id="input-btn-subtext" value="Registrarse & Obtener Pronósticos" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2 text-sm text-slate-200 outline-none">
-                    </div>
-                </div>
-
-                <!-- Términos de Juego -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-slate-400 mb-1.5">Sello Legal Inferior</label>
-                    <input type="text" id="input-disclaimer" value="*18 | Juega con responsabilidad | Aplican T&C" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
-                </div>
-
-                <!-- CONFIGURACIÓN DE MENSAJE BASE -->
-                <div class="border-t border-white/5 pt-4">
-                    <label class="block text-xs font-bold uppercase text-emerald-400 mb-1.5">Mensaje Base de WhatsApp</label>
-                    <input type="text" id="input-msg-template" value="Hola vengo de parte de" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-slate-200 outline-none focus:border-emerald-500 transition-all">
-                    <p class="text-[10px] text-slate-400 mt-1.5">El nombre que escriba el usuario se añadirá de forma automática al final de este texto.</p>
-                </div>
-            </div>
-
-            <!-- Botones de Acción -->
-            <div class="mt-6 pt-4 border-t border-white/5 flex gap-3">
-                <button onclick="applyChanges()" class="flex-grow py-3 px-4 bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-slate-950 font-bold rounded-xl text-sm transition-all">
-                    Aplicar Cambios
-                </button>
-                <button onclick="downloadSelf()" class="flex-grow py-3 px-4 bg-slate-800 hover:bg-slate-700 active:scale-95 text-white font-bold rounded-xl text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
-                    📥 Descargar Web
-                </button>
-            </div>
-
-        </div>
-    </div>
-
     <!-- Footer de la marca -->
     <footer class="py-4 text-center text-[10px] text-emerald-500/30 font-semibold uppercase tracking-widest relative z-10 bg-black/25">
         &copy; Sorti365 Secure Bridge Technology
@@ -215,8 +126,8 @@
 
     <!-- SCRIPT DE EFECTOS VISUALES Y CONTROL DE CONFIGURACIÓN -->
     <script>
-        // Configuración inicial por defecto
-        let config = {
+        // Configuración inicial por defecto (Bloqueada para edición de visitantes)
+        const config = {
             phone: "593963041121",
             brandSubtitle: "Soporte y Registro VIP",
             mainTitle: "COPA",
@@ -226,28 +137,6 @@
             disclaimer: "*18 | Juega con responsabilidad | Aplican T&C",
             msgTemplate: "Hola vengo de parte de"
         };
-
-        // Mostrar u ocultar el panel de configuración
-        function toggleConfig() {
-            const panel = document.getElementById('config-panel');
-            panel.classList.toggle('hidden');
-        }
-
-        // Aplicar los cambios de configuración
-        function applyChanges() {
-            config.phone = document.getElementById('input-phone').value.replace(/[^0-9]/g, '');
-            config.brandSubtitle = document.getElementById('input-brand-subtitle').value;
-            config.mainTitle = document.getElementById('input-main-title').value;
-            config.accentTitle = document.getElementById('input-accent-title').value;
-            config.btnText = document.getElementById('input-btn-text').value;
-            config.btnSubtext = document.getElementById('input-btn-subtext').value;
-            config.disclaimer = document.getElementById('input-disclaimer').value;
-            config.msgTemplate = document.getElementById('input-msg-template').value;
-
-            updateDOM();
-            toggleConfig();
-            showToast("¡Configuración aplicada y actualizada!");
-        }
 
         // Actualizar visualmente la página entera
         function updateDOM() {
@@ -259,7 +148,7 @@
             updateMessage();
         }
 
-        // Se ejecuta cada vez que el usuario escribe en el campo de texto o cambia la configuración
+        // Se ejecuta cada vez que el usuario escribe en el campo de texto
         function updateMessage() {
             const nameInput = document.getElementById('influencer-input');
             const name = nameInput.value.trim();
@@ -270,13 +159,12 @@
             if (!name) {
                 // Estado bloqueado (Vacío)
                 btn.href = "#";
-                // Añadimos evento preventivo interactivo
                 btn.onclick = function(e) {
                     e.preventDefault();
                     showToast("Por favor, ingresa el nombre de referido para activar el botón");
                 };
                 
-                // Clases de Tailwind de bloqueo visual (Gris sin hover, pulso ni cursor interactivo normal)
+                // Clases de Tailwind de bloqueo visual
                 btn.className = "flex flex-col items-center justify-center w-full py-5 px-6 bg-slate-800 text-slate-500 rounded-2xl border-2 border-slate-700/50 cursor-not-allowed opacity-60 transition-all duration-200";
                 
                 btnText.innerText = "⚠️ INGRESA UN NOMBRE";
@@ -297,39 +185,6 @@
                 btnSubtext.innerText = `Mensaje listo: "${finalMsg}"`;
                 btnSubtext.className = "text-xs text-slate-950/75 font-semibold mt-1";
             }
-        }
-
-        // Descargar tu propia versión nativa ya configurada (Serialización robusta por JSON)
-        function downloadSelf() {
-            let currentHTML = document.documentElement.outerHTML;
-
-            // Guardar el estado exacto de la configuración serializado como JSON
-            const regexConfig = /let config = \{[\s\S]*?\};/;
-            const newConfigString = `let config = ${JSON.stringify(config, null, 12)};`;
-
-            currentHTML = currentHTML.replace(regexConfig, newConfigString);
-
-            // Reemplazar valores base de los inputs para que al cargarse de nuevo conserven los datos limpios
-            currentHTML = currentHTML.replace(/id="input-phone" value=".*?"/, `id="input-phone" value="${config.phone}"`);
-            currentHTML = currentHTML.replace(/id="input-brand-subtitle" value=".*?"/, `id="input-brand-subtitle" value="${config.brandSubtitle}"`);
-            currentHTML = currentHTML.replace(/id="input-main-title" value=".*?"/, `id="input-main-title" value="${config.mainTitle}"`);
-            currentHTML = currentHTML.replace(/id="input-accent-title" value=".*?"/, `id="input-accent-title" value="${config.accentTitle}"`);
-            currentHTML = currentHTML.replace(/id="input-btn-text" value=".*?"/, `id="input-btn-text" value="${config.btnText}"`);
-            currentHTML = currentHTML.replace(/id="input-btn-subtext" value=".*?"/, `id="input-btn-subtext" value="${config.btnSubtext}"`);
-            currentHTML = currentHTML.replace(/id="input-disclaimer" value=".*?"/, `id="input-disclaimer" value="${config.disclaimer}"`);
-            currentHTML = currentHTML.replace(/id="input-msg-template" value=".*?"/, `id="input-msg-template" value="${config.msgTemplate}"`);
-
-            const blob = new Blob(["<!DOCTYPE html>\n" + currentHTML], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'sorti365_influencer_bridge.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            showToast("¡Archivo web descargado con éxito!");
         }
 
         // Mostrar Toast
@@ -416,5 +271,3 @@
     </script>
 </body>
 </html>
-
-```
